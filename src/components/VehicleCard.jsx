@@ -20,7 +20,7 @@ const VehicleCard = ({ vehicle }) => {
       </div>
 
       <div className="space-y-1 mb-8">
-        <h3 className="text-xl font-bold tracking-tighter text-white uppercase italic">
+        <h3 className="text-xl font-bold tracking-tighter text-white uppercase">
           {vehicle.name}
         </h3>
         <p className="text-[10px] text-[#888888] tracking-widest uppercase">
