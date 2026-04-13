@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import DashboardLayout from './components/DashboardLayout';
 import { VehicleProvider, useVehicles } from './context/VehicleContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ToastProvider } from './context/ToastContext';
 import { VEHICLES } from './data/vehicles';
 
 // Pages
@@ -124,9 +125,11 @@ const AppContent = () => {
 const App = () => {
   return (
     <AuthProvider>
-      <VehicleProvider>
-        <AppContent />
-      </VehicleProvider>
+      <ToastProvider>
+        <VehicleProvider>
+          <AppContent />
+        </VehicleProvider>
+      </ToastProvider>
     </AuthProvider>
   );
 };

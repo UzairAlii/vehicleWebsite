@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 import { User, Mail, Phone, Lock, Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react';
 
 const Signup = () => {
@@ -14,38 +15,18 @@ const Signup = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const { signup } = useAuth();
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
   const validate = () => {
     const newErrors = {};
-    
-    // Full Name
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'FULL NAME IS REQUIRED';
-    }
-
-    // Email
-    if (!formData.email.trim()) {
-      newErrors.email = 'EMAIL IS REQUIRED';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'PLEASE ENTER A VALID EMAIL ADDRESS';
-    }
-
-    // Phone
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'PHONE NUMBER IS REQUIRED';
-    } else if (!/^\d+$/.test(formData.phone)) {
-      newErrors.phone = 'PLEASE ENTER NUMBERS ONLY';
-    } else if (formData.phone.length < 10) {
-      newErrors.phone = 'ENTER A VALID 10-DIGIT NUMBER';
-    }
-
-    // Password
-    if (!formData.password) {
-      newErrors.password = 'PASSWORD IS REQUIRED';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'PASSWORD MUST BE AT LEAST 6 CHARACTERS';
-    }
+    if (!formData.fullName.trim()) newErrors.fullName = 'NAME IS REQUIRED';
+    if (!formData.email.trim()) newErrors.email = 'EMAIL IS REQUIRED';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'ENTER VALID EMAIL';
+    if (!formData.phone.trim()) newErrors.phone = 'PHONE IS REQUIRED';
+    else if (!/^\d+$/.test(formData.phone)) newErrors.phone = 'NUMBERS ONLY';
+    if (!formData.password) newErrors.password = 'PASSWORD IS REQUIRED';
+    else if (formData.password.length < 6) newErrors.password = 'MIN 6 CHARS';
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -55,6 +36,7 @@ const Signup = () => {
     e.preventDefault();
     if (validate()) {
       signup(formData);
+      showToast('Account Created Successfully.');
       navigate('/');
     }
   };

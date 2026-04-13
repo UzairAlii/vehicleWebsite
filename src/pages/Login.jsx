@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react';
 
 const Login = () => {
@@ -9,25 +10,21 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
   const validate = () => {
     const newErrors = {};
-    
-    // Email Validation
     if (!formData.email.trim()) {
       newErrors.email = 'EMAIL IS REQUIRED';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'PLEASE ENTER A VALID EMAIL ADDRESS (E.G. NAME@MAIL.COM)';
+      newErrors.email = 'ENTER A VALID EMAIL';
     }
-    
-    // Password Validation
     if (!formData.password) {
       newErrors.password = 'PASSWORD IS REQUIRED';
     } else if (formData.password.length < 6) {
-      newErrors.password = 'PASSWORD MUST BE AT LEAST 6 CHARACTERS LONG';
+      newErrors.password = 'MINIMUM 6 CHARACTERS';
     }
-    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -36,6 +33,7 @@ const Login = () => {
     e.preventDefault();
     if (validate()) {
       login(formData.email, formData.password);
+      showToast('Welcome back to LuxeDrive.');
       navigate('/');
     }
   };
