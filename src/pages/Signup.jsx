@@ -70,8 +70,8 @@ const Signup = () => {
         className="w-full max-w-[500px] bg-[#0A0A0A] border border-[#222222] rounded-[2.5rem] p-10 md:p-14 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative z-10"
       >
         <div className="flex flex-col items-center mb-10">
-          <div className="text-4xl font-black tracking-tighter text-white mb-2 italic">
-            AUTOV<span className="not-italic text-[#444444]">AULT</span>
+          <div className="text-4xl font-black tracking-tighter text-white mb-2 text-center">
+            LUXE<span className="text-[#444444]">DRIVE</span>
           </div>
           <p className="text-[10px] text-[#444444] font-bold tracking-[0.5em] uppercase">
             CREATE NEW ACCOUNT

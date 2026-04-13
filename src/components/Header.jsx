@@ -27,9 +27,8 @@ const Header = () => {
   return (
     <header className="border-b border-[#222222] bg-black sticky top-0 z-50">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
-        {/* Logo */}
         <NavLink to="/" className="text-xl sm:text-2xl font-black tracking-tighter text-white shrink-0">
-          AUTOV<span className="italic text-[#444444]">AULT</span>
+          LUXE<span className="text-[#444444]">DRIVE</span>
         </NavLink>
 
         {/* Desktop Navigation */}
